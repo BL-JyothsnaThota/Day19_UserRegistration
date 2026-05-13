@@ -29,26 +29,21 @@ public class UserValidator {
         return Pattern.matches(regex, mobile);
     }
 
-    // UC5 - Min 8 chars
-    public static boolean validatePasswordRule1(String password) {
-        String regex = "^.{8,}$";
-        return Pattern.matches(regex, password);
-    }
-
-    // UC6 - At least 1 uppercase + min 8 chars
-    public static boolean validatePasswordRule2(String password) {
-        String regex = "^(?=.*[A-Z]).{8,}$";
+    // UC7 - Combined Rule (Min 8 + Uppercase + Number)
+    public static boolean validatePasswordRule3(String password) {
+        String regex = "^(?=.*[A-Z])(?=.*[0-9]).{8,}$";
         return Pattern.matches(regex, password);
     }
 
     public static void main(String[] args) {
 
         // Valid
-        System.out.println(validatePasswordRule2("Abcd1234")); // true
-        System.out.println(validatePasswordRule2("Password")); // true
+        System.out.println(validatePasswordRule3("Abcd1234")); // true
+        System.out.println(validatePasswordRule3("Passw0rd")); // true
 
         // Invalid
-        System.out.println(validatePasswordRule2("abcd1234")); // false (no uppercase)
-        System.out.println(validatePasswordRule2("Abc12"));    // false (<8 chars)
+        System.out.println(validatePasswordRule3("Password")); // false (no number)
+        System.out.println(validatePasswordRule3("abcd1234")); // false (no uppercase)
+        System.out.println(validatePasswordRule3("Abc12"));    // false (<8 chars)
     }
 }
