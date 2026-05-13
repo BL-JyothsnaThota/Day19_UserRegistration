@@ -3,7 +3,7 @@ import java.util.regex.Pattern;
 
 public class UserValidator {
 
-    // Common Name Validation (UC1 & UC2)
+    // UC1 & UC2 - Name Validation
     public static boolean validateName(String name) {
         String regex = "^[A-Z][a-zA-Z]{2,}$";
         return Pattern.matches(regex, name);
@@ -17,22 +17,27 @@ public class UserValidator {
         return validateName(lastName);
     }
 
-    // UC3 - Email Validation
+    // UC3 - Email
     public static boolean validateEmail(String email) {
         String regex = "^[a-zA-Z0-9]+([._+-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}(\\.[a-zA-Z]{2,})?$";
         return Pattern.matches(regex, email);
     }
 
+    // UC4 - Mobile Number
+    public static boolean validateMobile(String mobile) {
+        String regex = "^[0-9]{2}\\s[0-9]{10}$";
+        return Pattern.matches(regex, mobile);
+    }
+
     public static void main(String[] args) {
 
-        // Valid Emails
-        System.out.println(validateEmail("abc@bl.co"));         // true
-        System.out.println(validateEmail("abc.xyz@bl.co"));     // true
-        System.out.println(validateEmail("abc.xyz@bl.co.in"));  // true
+        // Valid
+        System.out.println(validateMobile("91 9919819801")); // true
 
-        // Invalid Emails
-        System.out.println(validateEmail("abc@.co"));           // false
-        System.out.println(validateEmail("abc@bl"));            // false
-        System.out.println(validateEmail("abc.xyz@bl."));       // false
+        // Invalid
+        System.out.println(validateMobile("919919819801")); // false (no space)
+        System.out.println(validateMobile("91-9919819801")); // false (wrong separator)
+        System.out.println(validateMobile("91 99198")); // false (less digits)
+        System.out.println(validateMobile("9 9919819801")); // false (country code wrong)
     }
 }
