@@ -29,9 +29,9 @@ public class UserValidator {
         return Pattern.matches(regex, mobile);
     }
 
-    // UC7 - Combined Rule (Min 8 + Uppercase + Number)
+    // UC8 - Combined Rule (Min 8 + Uppercase + Number + exactly one special character)
     public static boolean validatePasswordRule3(String password) {
-        String regex = "^(?=.*[A-Z])(?=.*[0-9]).{8,}$";
+        String regex = "^(?=.*[A-Z])(?=.*[0-9])(?=(?:.*[@#$%^&+=]){1}$)[A-Za-z0-9@#$%^&+=]{8,}$";
         return Pattern.matches(regex, password);
     }
 
