@@ -30,7 +30,7 @@ public class UserValidator {
     }
 
     // UC8 - Combined Rule (Min 8 + Uppercase + Number + exactly one special character)
-    public static boolean validatePasswordRule3(String password) {
+    public static boolean validatePassword(String password) {
         String regex = "^(?=.*[A-Z])(?=.*[0-9])(?=(?:.*[@#$%^&+=]){1}$)[A-Za-z0-9@#$%^&+=]{8,}$";
         return Pattern.matches(regex, password);
     }
@@ -38,12 +38,12 @@ public class UserValidator {
     public static void main(String[] args) {
 
         // Valid
-        System.out.println(validatePasswordRule3("Abcd1234")); // true
-        System.out.println(validatePasswordRule3("Passw0rd")); // true
+        System.out.println(validatePassword("Abcd1234")); // true
+        System.out.println(validatePassword("Passw0rd")); // true
 
         // Invalid
-        System.out.println(validatePasswordRule3("Password")); // false (no number)
-        System.out.println(validatePasswordRule3("abcd1234")); // false (no uppercase)
-        System.out.println(validatePasswordRule3("Abc12"));    // false (<8 chars)
+        System.out.println(validatePassword("Password")); // false (no number)
+        System.out.println(validatePassword("abcd1234")); // false (no uppercase)
+        System.out.println(validatePassword("Abc12"));    // false (<8 chars)
     }
 }
