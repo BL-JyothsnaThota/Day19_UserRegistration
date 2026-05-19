@@ -2,48 +2,59 @@ package com.bridgelabz.registration;
 import java.util.regex.Pattern;
 
 public class UserValidator {
+	
+	
 
-    // UC1 & UC2 - Name
-    public static boolean validateName(String name) {
-        String regex = "^[A-Z][a-zA-Z]{2,}$";
-        return Pattern.matches(regex, name);
-    }
+	    public static void validateFirstName(String firstName) throws UserRegistrationException {
+	        if (!Pattern.matches("^[A-Z][a-z]{2,}$", firstName)) {
+	            throw new UserRegistrationException(
+	                UserRegistrationException.ExceptionType.INVALID_FIRST_NAME,
+	                "Invalid First Name"
+	            );
+	        }
+	    }
+	    
+	    public static void validateLastName(String lastName) throws UserRegistrationException {
+	        if (!Pattern.matches("^[A-Z][a-z]{2,}$", lastName)) {
+	            throw new UserRegistrationException(
+	                UserRegistrationException.ExceptionType.INVALID_LAST_NAME,
+	                "Invalid Last Name"
+	            );
+	        }
+	    }
 
-    public static boolean validateFirstName(String firstName) {
-        return validateName(firstName);
-    }
+	    public static void validateMobile(String mobile) throws UserRegistrationException {
+	        if (!Pattern.matches("^[0-9]{2}\\s[0-9]{10}$", mobile)) {
+	            throw new UserRegistrationException(
+	                UserRegistrationException.ExceptionType.INVALID_MOBILE,
+	                "Invalid Mobile Number"
+	            );
+	        }
+	    }
+	    
+	    public static void validatePassword(String password) throws UserRegistrationException {
+	        if (!Pattern.matches("^[A-Z][a-z]{2,}$", password)) {
+	            throw new UserRegistrationException(
+	                UserRegistrationException.ExceptionType.INVALID_PASSWORD,
+	                "Invalid Password"
+	            );
+	        }
+	    }
+	    
+	    public static void validateEmail(String email) throws UserRegistrationException {
+	        String regex = "^[a-zA-Z0-9]+([._+-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(\\.[a-zA-Z]{2,})+$";
+	        if (!Pattern.matches(regex, email)) {
+	            throw new UserRegistrationException(
+	                UserRegistrationException.ExceptionType.INVALID_EMAIL,
+	                "Invalid Email"
+	            );
+	        }
+	    }
 
-    public static boolean validateLastName(String lastName) {
-        return validateName(lastName);
-    }
-
-    // UC3 - Email
-    public static boolean validateEmail(String email) {
-        String regex = "^[a-zA-Z0-9]+([._+-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}(\\.[a-zA-Z]{2,})?$";
-        return Pattern.matches(regex, email);
-    }
-
-    // UC4 - Mobile
-    public static boolean validateMobile(String mobile) {
-        String regex = "^[0-9]{2}\\s[0-9]{10}$";
-        return Pattern.matches(regex, mobile);
-    }
-
-    // UC8 - Combined Rule (Min 8 + Uppercase + Number + exactly one special character)
-    public static boolean validatePassword(String password) {
-        String regex = "^(?=.*[A-Z])(?=.*[0-9])(?=(?:.*[@#$%^&+=]){1}$)[A-Za-z0-9@#$%^&+=]{8,}$";
-        return Pattern.matches(regex, password);
-    }
 
     public static void main(String[] args) {
 
         // Valid
-        System.out.println(validatePassword("Abcd1234")); // true
-        System.out.println(validatePassword("Passw0rd")); // true
-
-        // Invalid
-        System.out.println(validatePassword("Password")); // false (no number)
-        System.out.println(validatePassword("abcd1234")); // false (no uppercase)
-        System.out.println(validatePassword("Abc12"));    // false (<8 chars)
+        
     }
 }
