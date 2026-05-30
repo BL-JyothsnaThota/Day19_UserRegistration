@@ -55,6 +55,20 @@ public class UserValidator {
     public static void main(String[] args) {
 
         // Valid
+    	 System.out.println("First Name: " +
+                 UserValidatorLambda.firstNameValidator.validate("John"));
+
+         System.out.println("Last Name: " +
+                 UserValidatorLambda.lastNameValidator.validate("Doe"));
+
+         System.out.println("Email: " +
+                 UserValidatorLambda.emailValidator.validate("abc.xyz@bl.co.in"));
+
+         System.out.println("Mobile: " +
+                 UserValidatorLambda.mobileValidator.validate("91 9919819801"));
+
+         System.out.println("Password: " +
+                 UserValidatorLambda.passwordValidator.validate("Abcdef1@"));
         
     }
 }
